@@ -1,5 +1,6 @@
 import { getJwtToken, getUser } from "./auth";
 import { request } from "../utils/request";
+const API_URL = import.meta.env.VITE_API_URL;
 
 export async function createPost(image, description) {
   // console.log(image);
@@ -10,7 +11,7 @@ export async function createPost(image, description) {
 
   formData.append("files.image", image);
   formData.append("data", JSON.stringify({ description }));
-  await fetch("/api/posts", {
+  await fetch(`${API_URL}/api/posts`, {
     method: "POST",
     body: formData,
     headers: {
@@ -21,7 +22,7 @@ export async function createPost(image, description) {
 
 export async function loadPosts(filters = "") {
   const response = await request(
-    "/api/posts?populate=*" + (filters && `&${filters}`)
+    `${API_URL}/api/posts?populate=*` + (filters && `&${filters}`)
   );
   return response.data.map((post) => ({
     id: post?.id,
@@ -36,14 +37,14 @@ export async function loadPosts(filters = "") {
 }
 
 export async function likePost(id) {
-  const response = await request(`/api/posts/${id}/like`, {
+  const response = await request(`${API_URL}/api/posts/${id}/like`, {
     method: "PUT",
   });
   return response.data;
 }
 
 export async function favorPost(id) {
-  const response = await request(`/api/posts/${id}/favor`, {
+  const response = await request(`${API_URL}/api/posts/${id}/favor`, {
     method: "PUT",
   });
   return response.data;
@@ -55,7 +56,7 @@ export async function loadPostsByMe() {
 
 export async function loadPostsLikedOrFavoredByMe(type = "likes") {
   const response = await request(
-    `/api/users/me?populate[${type}][populate][0]=image`
+    `${API_URL}/api/users/me?populate[${type}][populate][0]=image`
   );
   return response[type].map((post) => ({
     ...post,

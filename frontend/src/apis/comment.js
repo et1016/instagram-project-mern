@@ -1,7 +1,8 @@
 import { request } from "../utils/request";
+const API_URL = import.meta.env.VITE_API_URL;
 
 export async function createComment(content, postId) {
-  await request("/api/comments", {
+  await request(`${API_URL}/api/comments`, {
     method: "POST",
     body: {
       data: {
@@ -15,7 +16,7 @@ export async function createComment(content, postId) {
 export async function loadComments(postId) {
   if (!postId) return [];
   const response = await request(
-    "/api/comments?populate=*&filters[post][id][$eq]=" + postId
+    `${API_URL}/api/comments?populate=*&filters[post][id][$eq]=` + postId
   );
   console.log("The comment api:", response);
   return response.data.map((comment) => {

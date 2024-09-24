@@ -1,4 +1,5 @@
 import { request } from "../utils/request";
+const API_URL = import.meta.env.VITE_API_URL;
 
 export function getJwtToken() {
   return localStorage.getItem("jwtToken");
@@ -17,7 +18,7 @@ export function getUser() {
 }
 
 export async function register(email, username, password) {
-  const result = await request("/api/auth/local/register", {
+  const result = await request(`${API_URL}/api/auth/local/register`, {
     method: "POST",
     auth: false,
     body: {
@@ -33,7 +34,7 @@ export async function register(email, username, password) {
 }
 
 export async function login(email, password) {
-  const result = await request("/api/auth/local", {
+  const result = await request(`${API_URL}/api/auth/local`, {
     method: "POST",
     auth: false,
     body: {
