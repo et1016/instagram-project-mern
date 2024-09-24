@@ -1,0 +1,11 @@
+{
+  // 1.這主要是給vue看的,它會把一個項目當作整體來看待並優化自動導入功能
+  "compilerOptions": {
+    "baseUrl": "./src",
+    "allowSyntheticDefaultImports": true,
+    // 這個是說如果一個模塊沒有默認導出的話扔然允許
+    // 這種import一些東西from一些模塊這樣的語法
+    "module": "ES2015"
+    // 這邊指定ES2015,它是ES6這種模塊的管理方式也就是import語法
+  }
+}
