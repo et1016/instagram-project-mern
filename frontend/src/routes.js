@@ -1,4 +1,8 @@
-import { createRouter, createWebHistory } from "vue-router";
+import {
+  createRouter,
+  createWebHistory,
+  createWebHashHistory,
+} from "vue-router";
 import { getJwtToken } from "./apis/auth";
 import HomePage from "./pages/HomePage.vue";
 import SearchPage from "./pages/SearchPage.vue";
@@ -41,7 +45,8 @@ const routes = [
 
 const router = createRouter({
   routes,
-  history: createWebHistory(),
+  // history: createWebHistory(),
+  history: createWebHashHistory(),
 });
 
 router.beforeEach((to) => {
